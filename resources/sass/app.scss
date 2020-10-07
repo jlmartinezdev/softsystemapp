@@ -1,0 +1,35 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+ .h-screen{
+ 	height: 100vh;
+ }
+ .navbar {
+    font-size: 12pt;
+}
+
+table td {
+    font-size: 11pt;
+}
+
+.alturaChart {
+    height: 300px;
+}
+
+.alturaSinDatos {
+    height: 10px;
+}
+
+.ocultar {
+    display: none;
+}
