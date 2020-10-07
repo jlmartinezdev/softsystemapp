@@ -196,7 +196,7 @@
 			  			this.error= e.message;
 			  		});
 		        }else{
-		        	axios.get('http://localhost/api/',{
+		        	axios.get('{{env("APP_APIDB")}}',{
 		        		params: {buscar: this.txtbuscar,bus_suc:this.ventaCabecera.idSucursal}
 		        	})
 		        	.then( response => {
@@ -220,7 +220,7 @@
 		  			$('#busquedaArticulo').modal('show');
 		  			this.buscar(0);
 		  		}else{
-		  			axios.get('http://localhost/api/',{params:{cbarra:this.txtbuscar,bus_suc: this.ventaCabecera.idSucursal}})
+		  			axios.get('{{env("APP_APIDB")}}',{params:{cbarra:this.txtbuscar,bus_suc: this.ventaCabecera.idSucursal}})
 		  			.then(response => {
 		  				const articulo= response.data;
 		  				if(articulo !="no"){
@@ -245,7 +245,7 @@
 		  		}
 		  		this.requestLote= true;
 		  		//Traer lotes
-		  		axios.get('//localhost/api/',{params:{ lote : a.ARTICULOS_cod, bus_suc : this.ventaCabecera.idSucursal}})
+		  		axios.get('{{env("APP_APIDB")}}',{params:{ lote : a.ARTICULOS_cod, bus_suc : this.ventaCabecera.idSucursal}})
         		.then(response =>{
         			const stocks= response.data;
         			this.requestLote= false;
@@ -473,7 +473,7 @@
 				if(this.ventaCabecera.descuento > 0 && this.ventaCabecera.total > 0){
 					this.ventaCabecera.total -=  this.ventaCabecera.descuento;
 				}
-					return this.format(this.ventaCabecera.total);
+				return this.format(this.ventaCabecera.total);
 				
 			}
 
