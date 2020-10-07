@@ -80,8 +80,8 @@
 									<td class="text-right font-weight-bold">@{{new Intl.NumberFormat("de-DE").format(venta.venta_total)}}</td>
 									<td>@{{venta.suc_desc}}</td>
                                     <td>
-                                        <button class="btn btn-link" @click="showDetalle(venta)"><span class="fa fa-file-alt"></span> Ver</button>
-                                        <a :href="'pdf/boletaventa/'+venta.nro_fact_ventas+'/'" class="btn btn-link"><span class="fa fa-file-pdf"></span></button>
+                                        <button class="btn btn-link" @click="showDetalle(venta)"><span class="fa fa-file-alt"></span> Detalle</button>
+                                        <a :href="'pdf/boletaventa/'+venta.nro_fact_ventas+'/'" class="btn btn-link"><span class="fa fa-file-pdf"></span> Imprimir</button>
                                     </td>
 								</tr>
 							</template>

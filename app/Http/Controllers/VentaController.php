@@ -7,6 +7,7 @@ use App\Venta;
 use App\Apertura;
 use App\Sucursal;
 use App\MovimientoCaja;
+use App\Empresa;
 use DB;
 use Auth;
 use PDF;
@@ -110,11 +111,13 @@ class VentaController extends Controller
         
     }
     public function pdfboleta($id){
-        /*$pdf= PDF::loadView('pdf.venta');
-        return $pdf->stream();*/
+       
         $venta =  Venta::join('clientes','clientes.CLIENTES_cod','=','ventas.CLIENTES_cod')->where('ventas.nro_fact_ventas',$id)->first();
         $detalle= $this->getDetalle($id);
-         return view('pdf.venta',compact('venta','detalle'));
+        $empresa= Empresa::first();
+        // $pdf= PDF::loadView('pdf.venta',compact('venta','detalle','empresa'));
+        // return $pdf->stream();
+        return view('pdf.venta',compact('venta','detalle','empresa'));
     }
    
 }
