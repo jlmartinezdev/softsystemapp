@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo','Login')
+@section('title','Login')
 @section('main')
 
 <div class="container d-flex justify-content-center align-items-center" id="app">

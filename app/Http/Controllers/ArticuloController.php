@@ -178,4 +178,7 @@ class ArticuloController extends Controller
             return "Error";
         }
     }
+    public function informe(){
+        return view('informes.articulo');
+    }
 }

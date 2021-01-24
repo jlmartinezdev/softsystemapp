@@ -4,6 +4,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 //Articulos
+Route::get('inf/articulo','ArticuloController@informe')->name('articulo@informe');
 Route::get('articulo','ArticuloController@index')->name('articulo');
 Route::get('articulo/buscar','ArticuloController@getArticulo')->name('articulo@buscar');
 Route::get('articulo/ultimo','ArticuloController@getUltimo')->name('articulo@ultimo');

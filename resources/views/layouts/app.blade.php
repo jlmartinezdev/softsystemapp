@@ -26,7 +26,7 @@
         @guest
             @include('partial.sidebar_login')
         @else
-            @if(Auth::user()->cod_rol == 1)
+            @if(Auth::user()->cod_rol == 4)
                 @include('partial.sidebar_administrador')
             @else
                 @include('partial.sidebar_vendedor')
