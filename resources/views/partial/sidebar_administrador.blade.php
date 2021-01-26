@@ -26,6 +26,9 @@
                                 <a class="nav-link  {{ setActive('articulo')}}" href="{{ route('articulo') }}"><span class="fa fa-clone"></span> Articulos</a>
                             </li>
                             <li class="nav-item">
+                            <a class="nav-link" href="{{route('compra')}}">Compra</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link  {{ setActive('venta')}}" href="{{ route('venta') }}"><span class="fa fa-cog"></span> Venta</a>
                             </li>
                             <li class="nav-item dropdown">

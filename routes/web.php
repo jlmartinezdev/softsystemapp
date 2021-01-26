@@ -23,6 +23,9 @@ Route::get('infventa/detalle/{id}','VentaController@getDetalle');
 Route::get('infventa/articulo','VentaController@getVentaArticulo');
 Route::get('venta','VentaController@index')->name('venta');
 Route::post('venta','VentaController@store');
+//COMPRA
+Route::get('compra','CompraController@index')->name('compra');
+
 //CAJA
 Route::get('aperturacierre','AperturaController@index')->name('apertura');
 Route::post('aperturaciere/open','AperturaController@store')->name('apertura.add');
