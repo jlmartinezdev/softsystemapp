@@ -44,6 +44,8 @@
                                 <a class="nav-link dropdown-toggle {{ setActive('inf')}}" href="#" role="button" data-toggle="dropdown" aria-haspopup=true aria-expanded="false"><span class="fa fa-sticky-note"></span> Informes</a>
                                 <div class="dropdown-menu" aria-labelledby="submenu_man" >
                                     <a href="{{ route('infventa') }}" class="dropdown-item">Ventas</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{{ route('infventa') }}" class="dropdown-item">Cuentas a Cobrar</a>
                                 </div>
                             </li>
                             

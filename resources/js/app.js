@@ -23,5 +23,5 @@ window.NumeroALetras = require('./numeroaletra');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('vPagination', require('./components/vue-plain-pagination.vue').default);
+//Vue.component('vPagination', require('./components/vue-plain-pagination.vue').default);
 Vue.component('registro_mostrado', require('./components/registro_mostrado.vue').default);

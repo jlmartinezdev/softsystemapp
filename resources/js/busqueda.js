@@ -1,0 +1,1 @@
+Vue.component('busqueda', require('./components/busqueda_articulo.vue').default);
