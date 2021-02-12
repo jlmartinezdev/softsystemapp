@@ -26,6 +26,7 @@ Route::post('venta','VentaController@store');
 //COMPRA
 Route::get('compra','CompraController@index')->name('compra');
 
+
 //CAJA
 Route::get('aperturacierre','AperturaController@index')->name('apertura');
 Route::post('aperturaciere/open','AperturaController@store')->name('apertura.add');
@@ -36,6 +37,9 @@ Route::get('movimiento','MovimientoCajaController@index')->name('movimiento');
 Route::get('movimiento/{nro_operacion}','MovimientoCajaController@getAll');
 Route::post('movimiento','MovimientoCajaController@store');
 
+//COBROS
+Route::get('infctacobrar','CtaCobrarController@indexInf')->name('infctacobrar');
+Route::get('ctas_cobrar/buscar','CtaCobrarController@getCtaCobrar')->name('ctas_cobrar@buscar');
 //Usuario
 Route::get('usuario','UserController@index')->name('usuario');
 Route::get('usuario/all','UserController@showAll')->name('showalluser');

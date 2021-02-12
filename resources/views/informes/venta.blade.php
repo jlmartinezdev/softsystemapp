@@ -122,6 +122,7 @@
                             <span class="m-4 pt-4 font-weight-bold">No hay datos para Mostrar...</span>
                         </template>
                         <div class="chart" id="line_chart_1" :class="[isDataChart ? alturaChart : alturaSinDatos]" ></div>
+                        <br><br><br>
                         <div class="chart" id="column_chart_1" :class="[isDataChart ? alturaChart : alturaSinDatos]"></div>
                     </div>
                     <!-- *********** SECCION ARTICULOS VENDIDOS ************* -->
