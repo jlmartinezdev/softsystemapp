@@ -143,9 +143,7 @@
                                     <td class="text-right">@{{format(dv.venta_cantidad * dv.venta_precio) }}</td>
                                 </tr>
                             </template>
-                            <tr>
-                                <td colspan="6">Nota:</td>
-                            </tr>
+                            
                         </table>  
                     </td>
                 </tr>    

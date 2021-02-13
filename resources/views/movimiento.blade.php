@@ -60,7 +60,7 @@
 						</td>
 						<td>@{{m.mov_fecha }}</td>
 						<td>@{{m.mov_concepto }}</td>
-						<td>
+						<td class="text-right">
 							<strong>@{{new Intl.NumberFormat("de-DE").format(m.mov_monto)}} </strong>
 							
 						</td>

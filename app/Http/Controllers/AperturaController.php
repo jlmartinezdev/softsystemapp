@@ -77,10 +77,30 @@ class AperturaController extends Controller
     }
     public function getStatu($id){
         $date= date('Y-m-d');
-        return Apertura::where('apert_cierres_caja.suc_cod','=',$id)
-        ->where('apert_cierres_caja.apert_fecha','=',$date)
-        ->where('apert_estado','=','1')
-        ->first();
+        $archivo= "c:/softsystem/configuracion.ini";
+        $contenido= parse_ini_file($archivo);
+        switch ($contenido['validez_apertura']) {
+            case '1':
+                return Apertura::where('apert_cierres_caja.suc_cod','=',$id)
+                ->where('apert_cierres_caja.apert_fecha','=',$date)
+                ->where('apert_estado','=','1')
+                ->first();
+                break;
+            case '2':
+                return Apertura::where('apert_cierres_caja.suc_cod','=',$id)
+                ->where(DB::raw('TIMESTAMPDIFF(HOUR,CONCAT(apert_cierres_caja.apert_fecha," ",apert_cierres_caja.apert_hora),NOW())'),'<','24')
+                ->where('apert_estado','=','1')
+                ->get()
+                ->last();
+                break;
+            
+            default:
+                return Apertura::where('apert_cierres_caja.suc_cod','=',$id)
+                ->where('apert_estado','=','1')
+                ->get()
+                ->last();
+                break;
+        }
     }
     public function comando(){
         $exitCode = Artisan::call('config:clear');
