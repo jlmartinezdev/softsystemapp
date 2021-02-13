@@ -8,7 +8,7 @@
        /**/
    }
    .mystriped{
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0,0,0,.05) !important;
    }
    .trsimple{
     line-height: 0.8em;
@@ -19,7 +19,7 @@
 <div id="app">
     <div class="container">
         <div class="card">
-            <div class="card-header bg-warning font-weight-bold">Informes de cuentas a cobrar</div>
+            <div class="card-header bg-dark font-weight-bold text-white">Informes de cuentas a cobrar</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -102,7 +102,7 @@
                     <td>
                         <table class="table table-borderless table-sm">
                            
-                            <tr class="mb-4">
+                            <tr class="mb-4 font-weight-bold text-primary">
                                 <td><span class="fa fa-address-card text-secondary"></span> @{{ c.cliente_ruc }}</td>
                                 <td colspan="2"><span class="fa fa-user text-secondary"></span> @{{ c.cliente_nombre }}</td>
                                 <td colspan="2"><span class="fa fa-map-marker-alt text-secondary"></span> @{{ c.cliente_direccion}}</td>
@@ -122,7 +122,29 @@
                                 <td>@{{ format(c.total)}}</td>
                                 <td>@{{ c.pagada +" de "+ c.cuotas  }}</td>
                                 <td>@{{ format(c.cobrado) }}</td>
-                                <td>@{{ format(c.saldo)}}</td>
+                                <td class="text-danger font-weight-bold">@{{ format(c.saldo)}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="border-bottom"><strong>Detalle de Venta</strong>  - Descuento: @{{format(c.venta_descuento)}}  </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Codigo</strong></td>
+                                <td colspan="2"><strong>Descripcion</strong></td>
+                                <td><strong>Cantidad</strong></td>
+                                <td class="text-right"><strong>Precio</strong></td>
+                                <td class="text-right"><strong>Importe</strong></td>
+                            </tr>
+                            <template v-for="dv in detalleVenta(c.nro_fact_ventas)">
+                                <tr>
+                                    <td>@{{dv.producto_c_barra}}</td>
+                                    <td colspan="2">@{{dv.producto_nombre}}</td>
+                                    <td>@{{parseInt(dv.venta_cantidad)}}</td>
+                                    <td class="text-right">@{{format(dv.venta_precio)}}</td>
+                                    <td class="text-right">@{{format(dv.venta_cantidad * dv.venta_precio) }}</td>
+                                </tr>
+                            </template>
+                            <tr>
+                                <td colspan="6">Nota:</td>
                             </tr>
                         </table>  
                     </td>
@@ -142,6 +164,7 @@
             filtro : {orden:'ASC',busquedapor : 'cliente',ordenarpor:'0',ci: false},
             txtbuscar: '',
             ctas:[],
+            articulos:[],
             error:''
         },
         methods:{
@@ -163,7 +186,8 @@
                     if(response.data=='NO'){
                     Swal.fire('No se encontrado resultado!','Para:  '+this.txtbuscar, 'info' );
                     }else{
-                    this.ctas= response.data;
+                    this.ctas= response.data.ctas;
+                    this.articulos = response.data.articulos;
                    // this.paginacion= response.data.paginacion;
                     //this.paginacion.pagina_actual=1;
                     }
@@ -177,6 +201,11 @@
             },
             format: function(numero){
             	return new Intl.NumberFormat("de-DE").format(numero);
+            },
+            detalleVenta: function(nroventa){
+                return this.articulos.filter(function(venta){
+                    return venta.nro_fact_ventas==nroventa
+                })
             }
         }
     })
