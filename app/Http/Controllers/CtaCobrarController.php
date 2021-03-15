@@ -21,7 +21,7 @@ class CtaCobrarController extends Controller
         ->direccion($request->buscar,$request->buscarpor)
         ->groupBy('ctas_cobrar.nro_fact_ventas')
         ->having('saldo','>',0)
-        ->ordenar($request->ordenarpor,$request->ord)
+        ->ordenar($request->ordenarpor,$request->ord,$request->buscar)
         ->get();
         return [
             'ctas'=>$ctas,
