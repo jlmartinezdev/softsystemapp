@@ -77,7 +77,7 @@ class AperturaController extends Controller
     }
     public function getStatu($id){
         $date= date('Y-m-d');
-        $archivo= "c:/softsystem/configuracion.ini";
+        $archivo= base_path()."/configuracion.ini";
         $contenido= parse_ini_file($archivo);
         switch ($contenido['validez_apertura']) {
             case '1':

@@ -120,7 +120,7 @@
 			
 		</div>
 	</div>
-	<busqueda :articulo_sel="validarArticulo($event)"></busqueda>
+	<busqueda ></busqueda>
 </div>
 
 @endsection
@@ -132,7 +132,7 @@
 	data: {
 		txtbuscar: '',
 		requestSend: false,
-		requestLote: false
+		requestLote: false,
 		carro: [],
 		articulos: [],
 		stocks: [],
@@ -149,7 +149,7 @@
 			$('#busquedaArticulo').modal('show');
 			//this.buscar(false);
 		},
-		validarArticulo: function(articulo){
+		validarArticulo: function(a){
 			if(a.cantidad == 0) {
 		  			Swal.fire('Articulo en stock 0','No se puede agregar este articulo!','error');
 		  			return;
