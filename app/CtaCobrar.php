@@ -14,6 +14,9 @@ class CtaCobrar extends Model
 	];
     public function scopeCliente($query,$cliente,$buscarpor,$ci){
         if(!empty($cliente) && $buscarpor=='cliente'){
+            if(strtoupper($cliente)=='TODOS'){
+                return;
+            }
             if($ci=="true"){
                 return $query->where('c.cliente_ci','=',$cliente);
             }else {
@@ -24,10 +27,17 @@ class CtaCobrar extends Model
             
     }
     public function scopeDireccion($query,$direccion,$buscarpor){
-        if($direccion && $buscarpor=='direccion')
+        if($direccion && $buscarpor=='direccion'){
+            if(strtoupper($direccion)=='TODOS'){
+                return;
+            }
             return $query->where('c.cliente_direccion','LIKE',"%$direccion%");
+        }
     }
-    public function scopeOrdenar($query,$tipo,$ascdesc){
+    public function scopeOrdenar($query,$tipo,$ascdesc, $txtbuscar){
+        if(strtoupper($txtbuscar)=='TODOS'){
+            return $query->orderBy('c.cliente_direccion',$ascdesc);        
+        }
         $sql='';
         switch ($tipo) {
             case '1':

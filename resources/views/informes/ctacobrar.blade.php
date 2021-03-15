@@ -1,18 +1,28 @@
 @extends('layouts.app')
 @section('title','Informe de Cuenta a Cobrar')
 @section('style')
-<style type="text/css">
+<style type="text/css" media="all">
    table td {
        font-size: 10pt;
        padding: 0px;
        /**/
    }
    .mystriped{
-    background-color: rgba(0,0,0,.05) !important;
+    background-color: #f2f2f2 !important; 
    }
    .trsimple{
     line-height: 0.8em;
    }
+   body{
+    background-color: white;
+    -webkit-print-color-adjust: exact;
+   }
+   @media print{
+    .mystriped{
+    background-color: #f2f2f2 !important; 
+   }
+   }
+
 </style>
 @endsection
 @section('main')
@@ -63,7 +73,7 @@
                                     <option value="5">Cant. cuota</option>
                                     <option value="6">Total</option>
                                     <option value="7">Saldo</option>
-                                    <option value="8">Zona</option>
+                                    
 
                                 </select>
                             </div>
@@ -86,7 +96,7 @@
                         
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-primary btn-block"><span class="fa fa-print"></span> Vista Previa</button>
+                        <!--button class="btn btn-primary btn-block" @click="showComunidades"><span class="fa fa-print"></span> Comunidades</button -->
                     </div>
                 </div>
                 
@@ -150,7 +160,27 @@
             </template>
         </table>
     </div>
-
+    <div class="modal fade" id="frmcompania">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">      
+                <h4 class="modal-title">Compañias</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Cerrar</span>
+                    </button>
+              
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 @endsection
 @section('script')
@@ -204,6 +234,9 @@
                 return this.articulos.filter(function(venta){
                     return venta.nro_fact_ventas==nroventa
                 })
+            },
+            showComunidades: function(){
+                $('#frmcompania').modal('show');
             }
         }
     })
