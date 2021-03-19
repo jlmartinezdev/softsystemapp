@@ -262,14 +262,14 @@
                     if( ( dia -30 ) > 30 ){
                         return dia -30;
                     }else{
-                        0
+                        return "-";
                     }
                 }else{
                     diferenciaFecha= dia - (pagada *30);
                     if( diferenciaFecha > 30){
                         return diferenciaFecha -30;
                     }else{
-                        return 0
+                        return "-"
                     }
                 }
             }
