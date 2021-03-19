@@ -122,7 +122,7 @@
                                 <td><span class="fa fa-address-card text-secondary"></span> @{{ c.cliente_ruc }}</td>
                                 <td colspan="2"><span class="fa fa-user text-secondary"></span> @{{ c.cliente_nombre }}</td>
                                 <td colspan="2"><span class="fa fa-map-marker-alt text-secondary"></span> @{{ c.cliente_direccion}}</td>
-                                <td><span class="fa fa-phone-alt text-secondary"></span> @{{ c.cliente_cel}}</td>
+                                <td colspan="2"><span class="fa fa-phone-alt text-secondary"></span> @{{ c.cliente_cel}}</td>
                             </tr>
                             
                             <tr>
@@ -132,6 +132,7 @@
                                 <th>Cobrado/ Cuota</th>
                                 <th>Entrega + Cuota Cobrado</th>
                                 <th>Saldo</th>
+                                <th>Mora</th>
                             </tr>
                             <tr class="trsimple">
                                 <td>@{{ c.nro_fact_ventas }}</td>
@@ -140,16 +141,17 @@
                                 <td>@{{ (c.pagada-1) +" de "+ (c.cuotas-1)  }}</td>
                                 <td>@{{ format(c.cobrado) }}</td>
                                 <td class="text-danger font-weight-bold">@{{ format(c.saldo)}}</td>
+                                <td>@{{ diferenciaFecha(c.fecha_v,c.pagada-1) + " dias" }}</td>
                             </tr>
                             <tr>
-                                <td colspan="6" class="border-bottom"><strong>Detalle de Venta</strong>  - Descuento: @{{format(c.venta_descuento)}}  </td>
+                                <td colspan="7" class="border-bottom"><strong>Detalle de Venta</strong>  - Descuento: @{{format(c.venta_descuento)}}  </td>
                             </tr>
                             <tr>
                                 <td><strong>Codigo</strong></td>
                                 <td colspan="2"><strong>Descripcion</strong></td>
                                 <td><strong>Cantidad</strong></td>
                                 <td class="text-right"><strong>Precio</strong></td>
-                                <td class="text-right"><strong>Importe</strong></td>
+                                <td class="text-right" colspan="2"><strong>Importe</strong></td>
                             </tr>
                             <template v-for="dv in detalleVenta(c.nro_fact_ventas)">
                                 <tr>
@@ -157,7 +159,7 @@
                                     <td colspan="2">@{{dv.producto_nombre}}</td>
                                     <td>@{{parseInt(dv.venta_cantidad)}}</td>
                                     <td class="text-right">@{{format(dv.venta_precio)}}</td>
-                                    <td class="text-right">@{{format(dv.venta_cantidad * dv.venta_precio) }}</td>
+                                    <td class="text-right" colspan="2">@{{format(dv.venta_cantidad * dv.venta_precio) }}</td>
                                 </tr>
                             </template>
                             
@@ -247,6 +249,29 @@
             },
             showComunidades: function(){
                 $('#frmcompania').modal('show');
+            },
+            diferenciaFecha: function(fecha_vent, pagada){
+                //2016-07-12
+                var fechaInicio = new Date(fecha_vent).getTime();
+                var fechaFin    = new Date().getTime();
+                var diff = fechaFin - fechaInicio;
+                var dia=parseInt(diff/(1000*60*60*24));
+                var diferenciaFecha=0;
+                 
+                if( pagada== 0){
+                    if( ( dia -30 ) > 30 ){
+                        return dia -30;
+                    }else{
+                        0
+                    }
+                }else{
+                    diferenciaFecha= dia - (pagada *30);
+                    if( diferenciaFecha > 30){
+                        return diferenciaFecha -30;
+                    }else{
+                        return 0
+                    }
+                }
             }
         }
     })

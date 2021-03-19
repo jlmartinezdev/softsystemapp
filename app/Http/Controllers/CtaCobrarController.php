@@ -34,10 +34,13 @@ class CtaCobrarController extends Controller
     ];
         
     }
+    public function getCtasPagadas(Request $request){
+
+    }
     private function getCtas($request, $ci){
         return $ctas= CtaCobrar::join('ventas','ctas_cobrar.nro_fact_ventas','ventas.nro_fact_ventas')
         ->join('clientes as c','ventas.clientes_cod','c.CLIENTES_cod')
-        ->select('ctas_cobrar.nro_fact_ventas',DB::raw('COUNT(ctas_cobrar.nro_cuotas) as "cuotas"'),DB::raw('SUM(ctas_cobrar.monto_cobrado) as "cobrado"'),DB::raw('SUM(ctas_cobrar.monto_cuota) as "total"'),DB::raw('SUM(ctas_cobrar.monto_saldo) as "saldo"'),DB::raw('COUNT(IF(ctas_cobrar.estado=1,1,NULL)) AS "nopagada"'), DB::raw('COUNT(IF(ctas_cobrar.estado=0,1,NULL)) AS "pagada"'),DB::raw('DATE_FORMAT(ventas.venta_fecha,"%d/%m/%Y") as venta_fecha'),'ventas.venta_descuento','c.cliente_ruc','c.cliente_nombre','c.cliente_direccion', 'c.cliente_cel')
+        ->select('ctas_cobrar.nro_fact_ventas',DB::raw('COUNT(ctas_cobrar.nro_cuotas) as "cuotas"'),DB::raw('SUM(ctas_cobrar.monto_cobrado) as "cobrado"'),DB::raw('SUM(ctas_cobrar.monto_cuota) as "total"'),DB::raw('SUM(ctas_cobrar.monto_saldo) as "saldo"'),DB::raw('COUNT(IF(ctas_cobrar.estado=1,1,NULL)) AS "nopagada"'), DB::raw('COUNT(IF(ctas_cobrar.estado=0,1,NULL)) AS "pagada"'),DB::raw('DATE_FORMAT(ventas.venta_fecha,"%d/%m/%Y") as venta_fecha'),DB::raw('DATE_FORMAT(ventas.venta_fecha,"%Y-%m-%d") as fecha_v'),'ventas.venta_descuento','c.cliente_ruc','c.cliente_nombre','c.cliente_direccion', 'c.cliente_cel')
         ->cliente($request->buscar,$request->buscarpor,$ci)
         ->direccion($request->buscar,$request->buscarpor)
         ->groupBy('ctas_cobrar.nro_fact_ventas')
