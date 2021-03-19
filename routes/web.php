@@ -40,6 +40,7 @@ Route::post('movimiento','MovimientoCajaController@store');
 //COBROS
 Route::get('infctacobrar','CtaCobrarController@indexInf')->name('infctacobrar');
 Route::get('ctas_cobrar/buscar','CtaCobrarController@getCtaCobrar')->name('ctas_cobrar@buscar');
+Route::post('infctacobrar','CtaCobrarController@infToPdf')->name('infctacobrar@pdf');
 //Usuario
 Route::get('usuario','UserController@index')->name('usuario');
 Route::get('usuario/all','UserController@showAll')->name('showalluser');

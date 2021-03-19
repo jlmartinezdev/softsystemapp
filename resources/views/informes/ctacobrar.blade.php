@@ -31,12 +31,14 @@
         <div class="card">
             <div class="card-header bg-dark font-weight-bold text-white">Informes de cuentas a cobrar</div>
             <div class="card-body">
+            <form action="{{route('infctacobrar@pdf')}}" method="post">
+            @csrf
                 <div class="row">
                     <div class="col-md-4">
                         <div class="input-group">
-                            <input type="text" v-model="txtbuscar" @keyup.enter="buscar(false)" class="form-control" placeholder="Buscar...."/>
+                            <input type="text" v-model="txtbuscar" name="buscar" @keydown.enter="$event.preventDefault();" @keyup.enter="buscar(false)" class="form-control" placeholder="Buscar...."/>
                             <div class="input-group-append">
-                              <button class="btn btn-secondary" @click="buscar(false)">
+                              <button class="btn btn-secondary" @click="$event.preventDefault();buscar(false)" type="button" >
                                 <template v-if="requestSend">
                                     <span class="spinner-border spinner-border-sm" role="status"></span><span class="sr-only">Buscando...</span> Cargando...
                                 </template>
@@ -51,7 +53,7 @@
                         <div class="d-flex">
                             <div class="border-left pl-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="cliente" v-model="filtro.busquedapor" name="busquedapor" id="defaultCheck1">
+                                    <input class="form-check-input" type="radio" value="cliente" v-model="filtro.busquedapor" name="buscarpor" id="defaultCheck1">
                                     <label class="form-check-label" for="defaultCheck1">
                                     <strong>Buscar por Cliente</strong>
                                     </label>
@@ -79,13 +81,13 @@
                             </div>
                             <div class="ml-2 border-left pl-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="ASC" @click="buscar(false)" name="orden" v-model="filtro.orden" id="defaultCheck3">
+                                    <input class="form-check-input" type="radio" value="ASC" @click="buscar(false)" name="ord" v-model="filtro.orden" id="defaultCheck3">
                                     <label class="form-check-label" for="defaultCheck3">
                                     ASC
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="DESC" @click="buscar(false)" v-model="filtro.orden" name="orden" id="defaultCheck4">
+                                    <input class="form-check-input" type="radio" value="DESC" @click="buscar(false)" v-model="filtro.orden" name="ord" id="defaultCheck4">
                                     <label class="form-check-label" for="defaultCheck4">
                                     DESC
                                     </label>
@@ -96,10 +98,10 @@
                         
                     </div>
                     <div class="col-md-3">
-                        <!--button class="btn btn-primary btn-block" @click="showComunidades"><span class="fa fa-print"></span> Comunidades</button -->
+                        <!-- button class="btn btn-primary btn-block" type="submit" ><span class="fa fa-print"></span> Exportar a PDF</button -->
                     </div>
                 </div>
-                
+                </form>
             </div>    
         </div>
         <br>
@@ -118,6 +120,7 @@
                                 <td colspan="2"><span class="fa fa-map-marker-alt text-secondary"></span> @{{ c.cliente_direccion}}</td>
                                 <td><span class="fa fa-phone-alt text-secondary"></span> @{{ c.cliente_cel}}</td>
                             </tr>
+                            
                             <tr>
                                 <th>Nro. Venta</th>
                                 <th>Fecha Venta</th>
@@ -197,6 +200,9 @@
         },
         methods:{
             buscar : function(p1){
+                if(this.txtbuscar.length<1)
+                    return
+
                 this.requestSend= true;
                 if(this.filtro.busquedapor=='cliente'){
                     var t=parseFloat(this.txtbuscar);

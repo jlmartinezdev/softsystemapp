@@ -115,7 +115,7 @@ class VentaController extends Controller
         $venta =  Venta::join('clientes','clientes.CLIENTES_cod','=','ventas.CLIENTES_cod')->where('ventas.nro_fact_ventas',$id)->first();
         $detalle= $this->getDetalle($id);
         $empresa= Empresa::first();
-        // $pdf= PDF::loadView('pdf.venta',compact('venta','detalle','empresa'));
+        //$pdf= PDF::loadView('pdf.venta',compact('venta','detalle','empresa'));
         // return $pdf->stream();
         return view('pdf.venta',compact('venta','detalle','empresa'));
     }

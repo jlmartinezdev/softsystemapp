@@ -2,6 +2,14 @@
 function setActive($ruta){
 	return request()->routeIs($ruta)? 'active' :'';
 }
+function filtrarCtas($a1,$nroventa){
+    return $filteredArray = Arr::where($a1->toArray(), function ($value, $key) use($nroventa) {
+        return $value['nro_fact_ventas'] == $nroventa;
+    });
+   /*  array_filter($a1,function($e){
+        return $e->nro_fact_ventas==$nroventa;
+    }); */
+}
 class NumeroALetras
 {
     private static $UNIDADES = [
