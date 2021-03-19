@@ -126,14 +126,14 @@
                                 <th>Fecha Venta</th>
                                 <th>Importe</th>
                                 <th>Cobrado/ Cuota</th>
-                                <th>Monto Cobrado</th>
+                                <th>Entrega + Cuota Cobrado</th>
                                 <th>Saldo</th>
                             </tr>
                             <tr class="trsimple">
                                 <td>@{{ c.nro_fact_ventas }}</td>
                                 <td>@{{ c.venta_fecha }}</td>
                                 <td>@{{ format(c.total)}}</td>
-                                <td>@{{ c.pagada +" de "+ c.cuotas  }}</td>
+                                <td>@{{ (c.pagada-1) +" de "+ (c.cuotas-1)  }}</td>
                                 <td>@{{ format(c.cobrado) }}</td>
                                 <td class="text-danger font-weight-bold">@{{ format(c.saldo)}}</td>
                             </tr>
