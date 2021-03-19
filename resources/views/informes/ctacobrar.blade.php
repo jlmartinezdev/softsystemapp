@@ -21,6 +21,9 @@
     .mystriped{
     background-color: #f2f2f2 !important; 
    }
+   #frmparametro{
+    display: none;
+   }
    }
 
 </style>
@@ -28,7 +31,7 @@
 @section('main')
 <div id="app">
     <div class="container">
-        <div class="card">
+        <div class="card" id="frmparametro">
             <div class="card-header bg-dark font-weight-bold text-white">Informes de cuentas a cobrar</div>
             <div class="card-body">
             <form action="{{route('infctacobrar@pdf')}}" method="post">
@@ -105,14 +108,15 @@
             </div>    
         </div>
         <br>
-        <table class="table table-sm">
+        <table class="table table-sm table-borderless ">
             <tr>
-                <th>Resultado de busqueda</th>
+                <th>Resultado de busqueda - Cuentas a Cobrar</th>
             </tr>
             <template v-for="(c,index) in ctas">
-                <tr :class="{'mystriped': index % 2==0}">
+                <tr>
+                    <!-- :class="{'mystriped': index % 2==0}" -->
                     <td>
-                        <table class="table table-borderless table-sm">
+                        <table class="table table-sm border border-top">
                            
                             <tr class="mb-4 font-weight-bold text-primary">
                                 <td><span class="fa fa-address-card text-secondary"></span> @{{ c.cliente_ruc }}</td>
