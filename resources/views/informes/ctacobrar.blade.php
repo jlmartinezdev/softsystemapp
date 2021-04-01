@@ -132,7 +132,7 @@
                                 <th>Cobrado/ Cuota</th>
                                 <th>Entrega + Cuota Cobrado</th>
                                 <th>Saldo</th>
-                                <th>Mora</th>
+                                <th>Atraso</th>
                             </tr>
                             <tr class="trsimple">
                                 <td>@{{ c.nro_fact_ventas }}</td>

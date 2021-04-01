@@ -24,6 +24,7 @@ class VentaController extends Controller
     }
     public function index()
     {
+        return view('venta.generar');
         $apertura=Apertura::join('sucursales','apert_cierres_caja.suc_cod','=','sucursales.suc_cod')->join('caja','apert_cierres_caja.caja_cod','=','caja.caja_cod')
         ->where('apert_cierres_caja.apert_fecha','=',date('Y-m-d'))->get();
         return view('venta',compact('apertura'));
