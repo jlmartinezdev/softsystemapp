@@ -17,8 +17,9 @@
         <td colspan="2">Entrega Inicial</td>
       </tr>
       <tr>
-        <td><input class="form-control" type="text" v-model="total" disabled /></td>
-        <td colspan="2"><input class="form-control" type="text" v-model="entrega"/></td>
+        
+        <td><input class="form-control font-bold" id="total" data-inputmask-alias="datetime"  data-inputmask-inputformat="000.000.000" data-mask="" inputmode="numeric" type="text" v-model="total" disabled /></td>
+        <td colspan="2"><input class="form-control" id="entrega"  type="text" v-model="entrega"/></td>
 
       </tr>
       <tr>
@@ -27,8 +28,8 @@
         <td>Interes %</td>
       </tr>
       <tr>
-        <td><input class="form-control" type="text" v-model="saldo"/></td>
-        <td><input class="form-control" type="text" v-model="cant_cuota"/></td>
+        <td><input class="form-control" id="saldo" type="text" disabled="" v-model="saldo"/></td>
+        <td><input class="form-control" type="Number" v-model="cant_cuota"/></td>
         <td><input class="form-control" type="text" v-model="interes"/></td>
       </tr>
       <tr>
@@ -38,21 +39,31 @@
       </tr>
     </table>
     <hr>
-    <table class="table">
+    <table class="table table-striped table-hover table-sm">
+        <tbody>
+            
+        
       <template v-for="c in cuotas">
         <tr>
           <td>@{{c.nro}}</td>
-          <td>@{{c.monto}}</td>
+          <td>@{{new Intl.NumberFormat("de-DE").format(c.monto)}}</td>
           <td>@{{c.vencimiento}}</td>
           <td>@{{c.tipo}}</td>
         </tr>
       </template>
+  </tbody>
     </table>
 </div>
     
 </body>
 <script src="{{ mix('js/app.js') }}"></script>
 <script>
+    $(document).ready(function(){
+    // $('#total').mask('000.000.000.000', {reverse: true});
+     $('#entrega').mask('000.000.000.000', {reverse: true});
+     $('#saldo').mask('000.000.000.000', {reverse: true});
+});
+
 var app= new Vue({
     el: '#app',
     data:{

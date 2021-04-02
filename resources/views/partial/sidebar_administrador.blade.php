@@ -1,74 +1,168 @@
- <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm fixed-top">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'SOFTSYSTEM') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="/img/logo-softsystem.png" alt="Softystem" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SOFTSYSTEM</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"> {{ Auth::user()->nom_usuarios }}</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
             </button>
+          </div>
+        </div>
+      </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav">
-                        <li>
-                            <a class="nav-link {{ setActive('home')}}" href="{{ route('home') }}"><span class="fa fa-home"></span> Inicio <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="submenu_man" role="button" data-toggle="dropdown" aria-haspopup=true aria-expanded="false">Mantenimiento</a>
-                            <div class="dropdown-menu" aria-labelledby="submenu_man" >
-                                <a href="{{route('usuario')}}" class="dropdown-item">Usuario</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="{{route('seccion.index')}}" class="dropdown-item">Seccion</a>
-                                <a href="{{route('cliente.index')}}" class="dropdown-item"> Cliente</a>
-                            </div>
-                        </li>
-                        <li class="nav-item"  id="menuarticulos">
-                            <a class="nav-link  {{ setActive('articulo')}}" href="{{ route('articulo') }}"><span class="fa fa-clone"></span> Articulos</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{route('compra')}}">Compra</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  {{ setActive('venta')}}" href="{{ route('venta') }}"><span class="fa fa-cog"></span> Venta</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="submenu_man" role="button" data-toggle="dropdown" aria-haspopup=true aria-expanded="false"><span class="fa fa-cash-register"></span> Caja</a>
-                            <div class="dropdown-menu" aria-labelledby="submenu_man" >
-                                <a href="{{ route('apertura') }}" class="dropdown-item">Apertura - Cierre</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="{{ route('movimiento') }}" class="dropdown-item">Movimiento Caja</a>
-                                
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown"  id="menuinforme">
-                            <a class="nav-link dropdown-toggle {{ setActive('inf')}}" href="#" role="button" data-toggle="dropdown" aria-haspopup=true aria-expanded="false"><span class="fa fa-sticky-note"></span> Informes</a>
-                            <div class="dropdown-menu" aria-labelledby="submenu_man" >
-                                <a href="{{ route('infventa') }}" class="dropdown-item">Ventas</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="{{ route('infctacobrar') }}" class="dropdown-item">Cuentas a Cobrar</a>
-                            </div>
-                        </li>
-                        
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <span class="fa fa-user"></span>  {{ Auth::user()->nom_usuarios }} <span class="caret"></span>
-                            </a>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+           <li class="nav-item">
+            <a href="{{ route('home') }}" class="nav-link">
+              <i class="nav-icon fa fa-home"></i>
+              <p>
+                Inicio
+              </p>
+            </a>
+          </li>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Cerrar Sesion') }}
-                                </a>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-cog"></i>
+              <p>
+                Mantimiento
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('usuario')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Usuario</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('cliente.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cliente</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('seccion.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Seccion</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('articulo') }}" class="nav-link">
+              <i class="nav-icon fa fa-clone"></i>
+              <p>
+                Articulos
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('compra')}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Compra
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('venta') }}" class="nav-link">
+              <i class="nav-icon fa fa-cog"></i>
+              <p>
+                Venta
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-cash-register"></i>
+              <p>
+                Caja
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="{{route('sucursal.set')}}" class="nav-link"><span class="fa fa-warehouse"></span><span id="sucursal"></span></a>
-                            
-                        </li>
-                </ul>
-            </div>
-        </nav>
+              <li class="nav-item">
+                <a href="{{ route('apertura') }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Apertura - Cierre Caja</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('movimiento') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Movimiento caja</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-sticky-note"></i>
+              <p>
+                Informes
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            
+              <li class="nav-item">
+                <a href="{{ route('infventa') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ventas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('infctacobrar') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cuentas a cobrar</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          
+           <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+              <i class="nav-icon fa fa-sign-out-alt"></i>
+              <p>
+                Cerrar Sesion
+              </p>
+            </a>
+             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+            </form>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+
+
+ 

@@ -272,6 +272,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     ArticuloSel: function ArticuloSel(articulo) {
+      this.txtbuscar = '';
       $emit('articulo_sel', articulo);
     }
   },
@@ -632,7 +633,7 @@ var render = function() {
                                   attrs: { title: "Seleccionar" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.validarArticulo(articulo)
+                                      return _vm.ArticuloSel(articulo)
                                     }
                                   }
                                 },

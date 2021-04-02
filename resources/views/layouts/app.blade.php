@@ -12,17 +12,13 @@
     <!-- Scripts -->
 
       <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
-    <style type="text/css">
-        body {
-            background-color: #f8faff;
-        }
-    </style>
+    <link href="{{ asset('css/OverlayScrollbars.min.css') }}" rel="stylesheet">
     @yield("style")
 </head>
-<body>
-    <div>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
         @guest
             @include('partial.sidebar_login')
         @else
@@ -32,16 +28,20 @@
                 @include('partial.sidebar_vendedor')
             @endif
         @endguest
-      
-        <br>
-        <br>
-        <br>
-        <main>
+         <div class="content-wrapper">
+            <section class="content">
+            <div class="container-fluid">
             @yield('main')
-        </main>
+            </div>
+            </section>
+        </div>
+        <footer class="main-footer">
         @yield('footer')
+        </footer>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="{{ asset('js/adminlte.min.js') }}"></script>
     <script type="text/javascript">
         function soloNumero(event)
         {
