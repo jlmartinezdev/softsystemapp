@@ -29,6 +29,7 @@
                 @include('partial.sidebar_vendedor')
             @endif
         @endguest
+        <br>
          <div class="content-wrapper">
             <section class="content">
             <div class="container-fluid">

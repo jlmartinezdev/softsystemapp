@@ -15,7 +15,6 @@
         "browser-sync": "^2.26.7",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.1",
-        "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
@@ -26,8 +25,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@popperjs/core": "^2.9.2",
-        "jquery-mask-plugin": "^1.14.16",
+        "inputmask": "^5.0.5",
+        "jquery": "^3.6.0",
         "jquery-ui": "^1.12.1",
         "moment": "^2.29.1",
         "morris.js": "^0.5.0",

@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/OverlayScrollbars.min.css') }}" rel="stylesheet">
     <title>Generar cuota</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
       </tr>
       <tr>
         
-        <td><input class="form-control font-bold" id="total" data-inputmask-alias="datetime"  data-inputmask-inputformat="000.000.000" data-mask="" inputmode="numeric" type="text" v-model="total" disabled /></td>
+        <td><input class="form-control font-bold" id="total" style="text-align:right;"  type="text" v-model="total"/></td>
         <td colspan="2"><input class="form-control" id="entrega"  type="text" v-model="entrega"/></td>
 
       </tr>
@@ -57,11 +58,16 @@
     
 </body>
 <script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ asset('js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('js/adminlte.min.js') }}"></script>
 <script>
-    $(document).ready(function(){
+    $(function(){
     // $('#total').mask('000.000.000.000', {reverse: true});
-     $('#entrega').mask('000.000.000.000', {reverse: true});
-     $('#saldo').mask('000.000.000.000', {reverse: true});
+    console.log("Listo...")
+    var selector = document.getElementById("total");
+    Inputmask("999.999.999", { numericInput: true }).mask(selector);
+     //$('#entrega').inputmask('000.000.000.000');
+     //$('#saldo').inputmask('000.000.000.000');
 });
 
 var app= new Vue({

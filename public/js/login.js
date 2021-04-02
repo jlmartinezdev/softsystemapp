@@ -150,7 +150,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\softsystem\resources\js\login.js */"./resources/js/login.js");
+module.exports = __webpack_require__(/*! /var/www/html/softsystemapp/resources/js/login.js */"./resources/js/login.js");
 
 
 /***/ })

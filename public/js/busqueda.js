@@ -575,11 +575,11 @@ var render = function() {
                               _c("span", { staticClass: "sr-only" }, [
                                 _vm._v("Buscando...")
                               ]),
-                              _vm._v(" Cargando...\r\n\t                    ")
+                              _vm._v(" Cargando...\n\t                    ")
                             ]
                           : [
                               _c("span", { staticClass: "fa fa-search" }),
-                              _vm._v(" Buscar\r\n\t                    ")
+                              _vm._v(" Buscar\n\t                    ")
                             ]
                       ],
                       2
@@ -736,7 +736,7 @@ var staticRenderFns = [
         attrs: { role: "status" }
       }),
       _c("span", { staticClass: "sr-only" }, [_vm._v("Validando...")]),
-      _vm._v(" Verificando lotes...\r\n\t\t\t\t\t")
+      _vm._v(" Verificando lotes...\n\t\t\t\t\t")
     ])
   },
   function() {
@@ -1186,7 +1186,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\softsystem\resources\js\busqueda.js */"./resources/js/busqueda.js");
+module.exports = __webpack_require__(/*! /var/www/html/softsystemapp/resources/js/busqueda.js */"./resources/js/busqueda.js");
 
 
 /***/ })
