@@ -22,6 +22,7 @@
         @guest
             @include('partial.sidebar_login')
         @else
+             @include('partial.sidebar_top')
             @if(Auth::user()->cod_rol == 4)
                 @include('partial.sidebar_administrador')
             @else
@@ -41,6 +42,8 @@
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/inputmask.min.js') }}"></script>
     <script src="{{ asset('js/adminlte.min.js') }}"></script>
     <script type="text/javascript">
         function soloNumero(event)
