@@ -43,8 +43,6 @@
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.overlayScrollbars.min.js') }}"></script>
-    <script src="{{ asset('js/moment.min.js') }}"></script>
-    <script src="{{ asset('js/inputmask.min.js') }}"></script>
     <script src="{{ asset('js/adminlte.min.js') }}"></script>
     <script type="text/javascript">
         function soloNumero(event)

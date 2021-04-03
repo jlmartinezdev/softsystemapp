@@ -12,34 +12,39 @@
 </head>
 <body>
 <div id="app" class="container">
-<table class="table table-sm table-borderless">
-      <tr>
-        <td>Monto de Venta</td>
-        <td colspan="2">Entrega Inicial</td>
-      </tr>
-      <tr>
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            <label>Monto de Venta</label>
+            <p class="font-weight-bold text-primary">@{{new Intl.NumberFormat("de-DE").format(total)}}</p>
+        </div>
+        <div class="form-group">
+            <label>Entrega</label>
+            <input type="text" class="form-control number-separator" id="entrega" placeholder="Monto ..."  style="text-align:right;" @keyup="getSaldo" >
+        </div>
+        <div class="form-group">
+            <label>Cantidad Cuota</label>
+            <input type="Number" class="form-control" v-model="cant_cuota" placeholder="Cant. Cuota ...">
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label>Saldo</label>
+            <p class="font-weight-bold text-danger">@{{new Intl.NumberFormat("de-DE").format(saldo)}}</p>
+        </div>
         
-        <td><input class="form-control font-bold" id="total" style="text-align:right;"  type="text" v-model="total"/></td>
-        <td colspan="2"><input class="form-control" id="entrega"  type="text" v-model="entrega"/></td>
+        <div class="form-group">
+            <label>Interes %</label>
+            <input type="number" class="form-control" v-model="interes" placeholder="Porcentaje ...">
+        </div>
+        <div class="form-group">
+            <label><input type="checkbox"> Redondear Monto Cuota</label>
+            <button @click="generar" class="btn btn-success btn-block">Generar Cuota</button>
+        </div>
+    </div>
+</div>
 
-      </tr>
-      <tr>
-        <td>Saldo</td>
-        <td>cantidad de cuota</td>
-        <td>Interes %</td>
-      </tr>
-      <tr>
-        <td><input class="form-control" id="saldo" type="text" disabled="" v-model="saldo"/></td>
-        <td><input class="form-control" type="Number" v-model="cant_cuota"/></td>
-        <td><input class="form-control" type="text" v-model="interes"/></td>
-      </tr>
-      <tr>
-        <td><label><input type="checkbox"> Redondear Monto Cuota</label></td>
-        <td><button @click="generar" class="btn btn-success btn-block">Generar Cuota</button></td>
-        <td></td>
-      </tr>
-    </table>
-    <hr>
+    <hr> 
     <table class="table table-striped table-hover table-sm">
         <tbody>
             
@@ -60,22 +65,15 @@
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ asset('js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
+<script src="{{ asset('js/separator.js')}}"></script>
 <script>
-    $(function(){
-    // $('#total').mask('000.000.000.000', {reverse: true});
-    console.log("Listo...")
-    var selector = document.getElementById("total");
-    Inputmask("999.999.999", { numericInput: true }).mask(selector);
-     //$('#entrega').inputmask('000.000.000.000');
-     //$('#saldo').inputmask('000.000.000.000');
-});
-
 var app= new Vue({
     el: '#app',
     data:{
-        total: 1100000,
+        total: 1000000,
         cant_cuota: 3,
-        entrega: 100000,
+        sentrega: '',
+        entrega: 0,
         saldo: 1000000,
         interes: 0,
         cuota: { nro: 0, interes: 0, vencimiento: 0, monto: 0, tipo: 0 },
@@ -90,13 +88,15 @@ var app= new Vue({
             let Dia;
             let i_plus=0;
             
-            Importe = this.total;
+            Importe = this.saldo;
             cantidad = this.cant_cuota;
             
             if (cantidad < 1) {
+                Swal.fire('Atención...','Cantidad de cuota es 0!','warning');
                 return;
             }
             if (Importe < 1) {
+                Swal.fire('Atención...','No se puede generar cuota Saldo es 0!','warning');
                 return;
             }
             monto_cuota = Number.parseInt(Importe / cantidad);
@@ -153,6 +153,16 @@ var app= new Vue({
             console.log(this.cuotas);
             console.log(this.entrega);
         },
+        getSaldo: function(){
+            let sentrega= $('#entrega').val();
+            this.entrega= sentrega.replaceAll(',','');
+            if(this.total >= this.entrega){
+                this.saldo = this.total - this.entrega ;
+            }else{
+                Swal.fire('Atención...','Número ingresado es mayor a Monto de Venta!','warning');
+                this.saldo = 0; 
+            }
+        }
     }
 })
 
