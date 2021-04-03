@@ -1,0 +1,1 @@
+Vue.component('generar_cuota', require('./components/generar_cuota.vue').default);

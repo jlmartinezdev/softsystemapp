@@ -14,7 +14,7 @@
 @endsection
 @section('main')
 	<div id="app">
-		<div class="container">
+		<div >
 			<div class="row" >
 			<!-- PANEL IZQUIERDA -->
 			<div class="col-md-8">
@@ -146,6 +146,7 @@
 	</div>
 @endsection
 @section('script')
+<script src="{{ mix('js/venta.js')}}"></script>
 <script type="text/javascript">
 	var app= new Vue({
 		el: '#app',

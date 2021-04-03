@@ -14,7 +14,7 @@
 						<a class="nav-item nav-link" data-toggle="tab" role="tab" href="#frmstock" aria-controls="frmstock" aria-select="false">Stock</a>
 						<a class="nav-item nav-link" data-toggle="tab" role="tab" href="#frmprecio" aria-controls="frmprecio" aria-select="false">Precio</a>
 					</div>
-				</nav>
+				</nav> 
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="frmdescrip" role="tabpanel">
 						<div class="form-row">

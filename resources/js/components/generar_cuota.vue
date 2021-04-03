@@ -1,90 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+<template>
+<div>
 
-    <title>Generar cuota</title>
-</head>
-<body>
-<div id="app" class="container">
-    <div class="card border-success">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Monto de Venta</label>
-                        <p class="font-weight-bold text-primary">@{{new Intl.NumberFormat("de-DE").format(total)}}</p>
-                    </div>
-                    <div class="form-group">
-                        <label>Entrega</label>
-                        <input type="text" class="form-control number-separator" id="entrega" placeholder="Monto ..."  style="text-align:right;" @keyup="getSaldo" >
-                    </div>
-                    <div class="form-group">
-                        <label>Cantidad Cuota</label>
-                        <input type="Number" class="form-control" v-model="cant_cuota" placeholder="Cant. Cuota ...">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Saldo</label>
-                        <p class="font-weight-bold text-danger">@{{new Intl.NumberFormat("de-DE").format(saldo)}}</p>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Interes %</label>
-                        <input type="number" class="form-control" v-model="interes" placeholder="Porcentaje ...">
-                    </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" v-model="redondear"> Redondear Monto Cuota</label>
-                        <button @click="generar" class="btn btn-success btn-block"><span class="fa fa-cog"></span> Generar Cuota</button>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Monto de Venta</label>
+                <p class="font-weight-bold text-primary">{{new Intl.NumberFormat("de-DE").format(total)}}</p>
+            </div>
+            <div class="form-group">
+                <label>Entrega</label>
+                <input type="text" class="form-control number-separator" id="entrega" placeholder="Monto ..."  style="text-align:right;" @keyup="getSaldo" >
+            </div>
+            <div class="form-group">
+                <label>Cantidad Cuota</label>
+                <input type="Number" class="form-control" v-model="cant_cuota" placeholder="Cant. Cuota ...">
             </div>
         </div>
-        
+        <div class="col-6">
+            <div class="form-group">
+                <label>Saldo</label>
+                <p class="font-weight-bold text-danger">{{new Intl.NumberFormat("de-DE").format(saldo)}}</p>
+            </div>
+            
+            <div class="form-group">
+                <label>Interes %</label>
+                <input type="number" class="form-control" v-model="interes" placeholder="Porcentaje ...">
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" v-model="redondear"> Redondear Monto Cuota</label>
+                <button @click="generar" class="btn btn-success btn-block"><span class="fa fa-cog"></span> Generar Cuota</button>
+            </div>
+        </div>
     </div>
-   
+
 
     <hr> 
     <table class="table table-striped table-hover table-sm">
         <tbody>
             
-        
-      <template v-for="c in cuotas">
-        <tr>
-          <td>@{{c.nro}}</td>
-          <td>@{{new Intl.NumberFormat("de-DE").format(c.monto)}}</td>
-          <td>@{{c.vencimiento}}</td>
-          <td>@{{c.tipo}}</td>
-        </tr>
-      </template>
-  </tbody>
+        <template v-for="c in cuotas">
+            <tr>
+            <td>{{c.nro}}</td>
+            <td>{{new Intl.NumberFormat("de-DE").format(c.monto)}}</td>
+            <td>{{c.vencimiento}}</td>
+            <td>{{c.tipo}}</td>
+            </tr>
+        </template>
+        </tbody>
     </table>
 </div>
     
-</body>
-<script src="{{ mix('js/app.js') }}"></script>
-<script src="{{ asset('js/jquery.overlayScrollbars.min.js') }}"></script>
-<script src="{{ asset('js/adminlte.min.js') }}"></script>
-<script src="{{ asset('js/separator.js')}}"></script>
+</template>
 <script>
-var app= new Vue({
-    el: '#app',
-    data:{
-        total: 1000000,
-        cant_cuota: 3,
-        sentrega: '',
-        entrega: 0,
-        saldo: 1000000,
-        interes: 0,
-        cuota: { nro: 0, interes: 0, vencimiento: 0, monto: 0, tipo: 0 },
-        cuotas: [],
-        redondear: true,
+export default {
+    name: 'generar_cuota',
+    props: ['venta_total'],
+    data(){
+        return{
+            total: this.venta_total,
+            cant_cuota: 0,
+            sentrega: '',
+            entrega: 0,
+            saldo: this.venta_total,
+            interes: 0,
+            cuota: { nro: 0, interes: 0, vencimiento: 0, monto: 0, tipo: 0 },
+            cuotas: [],
+            redondear: true,
+        }
+       
     },
     methods: {
         generar: function () {
@@ -138,6 +121,7 @@ var app= new Vue({
             for (var i = 1; i <= cantidad; i++) {
                 this._setCuota(i+i_plus,this._nextMonth(d,true),monto_cuota,'Cuota');
             }
+            this.getCuotas();
         },
         _nextMonth: function(d,next){
             if(next){
@@ -155,9 +139,8 @@ var app= new Vue({
             };
             this.cuotas.push(cuota);
         },
-        showCuotas: function () {
-            console.log(this.cuotas);
-            console.log(this.entrega);
+        getCuotas: function () {
+            this.$emit('cuotas',this.cuotas);
         },
         getSaldo: function(){
             let sentrega= $('#entrega').val();
@@ -168,9 +151,14 @@ var app= new Vue({
                 Swal.fire('Atención...','Número ingresado es mayor a Monto de Venta!','warning');
                 this.saldo = 0; 
             }
+        },
+        _setTota: function(){
+            this.total= this.venta_total;
+            this.saldo= this.venta_total;
         }
+           
     }
-})
+
+};
 
 </script>
-</html>
