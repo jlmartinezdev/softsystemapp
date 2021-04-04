@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label><input type="checkbox" v-model="redondear"> Redondear Monto Cuota</label>
-                <button @click="generar" class="btn btn-success btn-block"><span class="fa fa-cog"></span> Generar Cuota</button>
+                <button @click="generar" class="btn btn-primary btn-block"><span class="fa fa-cog"></span> Generar Cuota</button>
             </div>
         </div>
     </div>
@@ -54,14 +54,13 @@
 <script>
 export default {
     name: 'generar_cuota',
-    props: ['venta_total'],
+    props: ['total'],
     data(){
         return{
-            total: this.venta_total,
-            cant_cuota: 0,
+            cant_cuota: 1,
             sentrega: '',
             entrega: 0,
-            saldo: this.venta_total,
+            saldo: 0,
             interes: 0,
             cuota: { nro: 0, interes: 0, vencimiento: 0, monto: 0, tipo: 0 },
             cuotas: [],
@@ -151,12 +150,11 @@ export default {
                 Swal.fire('Atención...','Número ingresado es mayor a Monto de Venta!','warning');
                 this.saldo = 0; 
             }
-        },
-        _setTota: function(){
-            this.total= this.venta_total;
-            this.saldo= this.venta_total;
         }
            
+    },
+    mounted(){
+        this.saldo= this.total;
     }
 
 };

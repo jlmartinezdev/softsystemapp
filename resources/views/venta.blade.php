@@ -147,6 +147,7 @@
 @endsection
 @section('script')
 <script src="{{ mix('js/venta.js')}}"></script>
+<script src="{{ asset('js/separator.js')}}"></script>
 <script type="text/javascript">
 	var app= new Vue({
 		el: '#app',

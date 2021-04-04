@@ -85,7 +85,7 @@
                                     </td>
 								</tr>
 							</template>
-
+|
                         </table>
                     </div>
                     <!-- *********** SECCION CHART ************* -->
@@ -93,6 +93,8 @@
                         <div class="form-inline">
                             <label for="filtro"><strong>Año</strong></label>
                             <select class="custom-select mx-2" name="filtro" v-model="chart.anho">
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
                                 <option value="2020">2020</option>
                                 <option value="2019">2019</option>
                                 <option value="2018">2018</option>
@@ -236,7 +238,7 @@
             data: {
                 url: 'controller/VentasController.php',
                 meses: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
-                anhos: ["2020", "2019", "2018", "2017"],
+                anhos: ["2022","2021","2020", "2019", "2018", "2017"],
                 fecha: {
                     desde: '2020-01-01',
                     hasta: '2020-01-01'
@@ -247,7 +249,7 @@
                 },
                 chart: {
                     mes: '1',
-                    anho: '2020',
+                    anho: '2021',
                     byYear: false
                 },
                 venta:{},

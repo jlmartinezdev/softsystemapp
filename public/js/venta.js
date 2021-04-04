@@ -150,14 +150,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'generar_cuota',
-  props: ['venta_total'],
+  props: ['total'],
   data: function data() {
     return {
-      total: this.venta_total,
-      cant_cuota: 0,
+      cant_cuota: 1,
       sentrega: '',
       entrega: 0,
-      saldo: this.venta_total,
+      saldo: 0,
       interes: 0,
       cuota: {
         nro: 0,
@@ -256,11 +255,10 @@ __webpack_require__.r(__webpack_exports__);
         Swal.fire('Atención...', 'Número ingresado es mayor a Monto de Venta!', 'warning');
         this.saldo = 0;
       }
-    },
-    _setTota: function _setTota() {
-      this.total = this.venta_total;
-      this.saldo = this.venta_total;
     }
+  },
+  mounted: function mounted() {
+    this.saldo = this.total;
   }
 });
 
@@ -410,7 +408,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-success btn-block",
+              staticClass: "btn btn-primary btn-block",
               on: { click: _vm.generar }
             },
             [_c("span", { staticClass: "fa fa-cog" }), _vm._v(" Generar Cuota")]
