@@ -1,51 +1,69 @@
-@extends('layouts.app')
-@section('title','Login')
-@section('main')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Login</title>
 
-<div class="container d-flex justify-content-center align-items-center" id="app">
-    <div class="card">
-        <div class="card-header bg-info text-white">
-            <strong>Iniciar Sesi&oacute;n</strong>
+    <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <style>
+      .abs-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+    </style>
+</head>
+<body class="h-100">
+  <div class="container" id="app">
+    <div class="abs-center">
+      <div class="card">
+          <div class="card-header bg-info text-white">
+              <strong>Iniciar Sesi&oacute;n</strong>
+          </div>
+        <div class="card-body">
+          <div style="padding-left:10px;padding-right:10px;">
+            <div id="msg" role="alert">&nbsp;</div>
+            <div class="input-group">
+              <span class="input-group-prepend">
+                <span class="input-group-text">
+                  <span class="fa fa-user"></span>
+                </span>
+              </span>
+              <select v-model="usuario" class="custom-select">
+                <option>Seleccionar</option>
+                <template v-for="usuario in usuarios">
+                  <option v-bind:value="usuario.user_usuarios">
+                  @{{ usuario.nom_usuarios }}
+                  </option>
+                </template>
+              </select>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-prepend">
+                <span class="input-group-text">
+                  <span class="fa fa-key"></span>  
+                </span>
+              </span>
+              <input tabindex="2" v-on:keyup.enter="enviar()"  type="password" v-model="password" class="form-control" placeholder="Contraseña">
+            </div>      
+          </div>
         </div>
-    <div class="card-body">
-        <div style="padding-left:10px;padding-right:10px;">
-        <div id="msg" role="alert">
-  &nbsp;</div>
-        <div class="input-group">
-            <span class="input-group-prepend">
-          <span class="input-group-text">
-            <span class="fa fa-user"></span>
-          </span>
-        </span>
-        <select v-model="usuario" class="custom-select">
-          <option>Seleccionar</option>
-          <template v-for="usuario in usuarios">
-            <option v-bind:value="usuario.user_usuarios">
-            @{{ usuario.nom_usuarios }}
-            </option>
-          </template>
-        </select>
+        <div class="card-footer">
+            <center><button v-on:click="enviar()" class="btn btn-success" ><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Acceder al Sistema</button></center>
+            <span class="text-muted align-items-center">Sistema de Gestion de Stock, Compra, Venta &copy; 2020</span>   
         </div>
-        <br>
-        <div class="input-group">
-            <span class="input-group-prepend">
-          <span class="input-group-text">
-            <span class="fa fa-key"></span>  
-          </span>
-        </span>
-            <input tabindex="2" v-on:keyup.enter="enviar()"  type="password" v-model="password" class="form-control" placeholder="Contraseña">
-        </div>      
+      </div>
     </div>
-    </div>
-    <div class="card-footer">
-        <center><button v-on:click="enviar()" class="btn btn-success" ><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Acceder al Sistema</button></center>
-        <span class="text-muted align-items-center">Sistema de Gestion de Stock, Compra, Venta &copy; 2020</span>   
-    </div>
-</div>
-</div>
-@endsection
-
-@section('script')
+    
+  </div>
+</body>
+<script src="{{ mix('js/app.js') }}"></script>
 <script>
     //const axios = require('axios').default;
     var app = new Vue({
@@ -102,4 +120,4 @@
   }
 })
 </script>
-@endsection
+</html>
