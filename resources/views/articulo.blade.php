@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-4 col-md-2">
+            <div class="col-sm-4 col-md-2 p-2">
               <button class="btn btn-primary" @click="showMArticulo"><span class="fa fa-plus"></span> Nuevo</button>
             </div>
             <div class="col-sm-8 col-md-6">
@@ -77,7 +77,8 @@
       </div><!--  END CARD -->
 
 		<template>
-			<table id="tabla" class="table table-striped table-hover table-sm table-responsive-sm">
+      <div class="table-responsive-sm">
+        <table id="tabla" class="table table-striped table-hover table-sm">
         <thead>
         <tr class="text-uppercase">
           <th>Codigo</th>
@@ -107,7 +108,9 @@
             </tr>
           </template>
         </tbody>
-			</table>
+      </table>
+      </div>
+			
       
       <!--div class="d-flex flex-column">
                   <span>{ a.producto_nombre }}</span>
@@ -163,7 +166,7 @@ var app = new Vue({
    	sucursales: [],
    	unidades:[],
     filtro: {seccion: 0, columna: 0, orden: 'ASC'},
-   	articulo:{codigo:'','c_barra':'','descripcion':'','indicaciones':'','modouso':'','seccion':1,'unidad':1,'factor':1,'ubicacion':'','costo':0,'p1':0,'p2':0,'p3':0,'p4':0,'m1':0,'m2':0,'m3':0,'m4':0,'svenc':'0'},
+   	articulo:{codigo:'','c_barra':'','descripcion':'','indicaciones':'','modouso':'','seccion':1,'unidad':1,'factor':1,'ubicacion':'','costo':0,'p1':0,'p2':0,'p3':0,'p4':0,'p5':0,'m1':0,'m2':0,'m3':0,'m4':0,'m5':0,'svenc':'0'},
    	stock: {'id':0,'cantidad':0,'loteold':'','lotenew':'','vencimiento':'','sucursal':1},
    	stocks:[],
    	error: '',
@@ -171,6 +174,11 @@ var app = new Vue({
     frmt:{i: -1,t:false,suc:0,cant:0}
   },
   methods: {
+    validar_Cbarra: function(){
+      if(this.articulo.c_barra.length==0){
+        this.articulo.c_barra= this.articulo.codigo.toString().padStart(7,'0')
+      }
+    },
     onChange: function () {//Al cambiar pagina
       if(this.paginacion.ultima_pagina > 1){
          this.buscar(true);
